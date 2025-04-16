@@ -268,10 +268,35 @@ Sim, dois. Um em 1989 e um em 2002
 
 * Quais os filmes que ganharam o Oscar de Melhor Filme?
 
+````js
+db.colecao.find({
+  categoria: "BEST PICTURE",
+  vencedor: 1
+},
+{
+  _id: 0,
+  ano_cerimonia: 1,
+  nome_do_filme: 1,
+  nome_do_indicado: 1
+}).sort({ ano_cerimonia: 1 })
+
+Lawrence Of Arabia; Tom Jones; My Fair Lady; The Sound of Music; A Man for All Seasons; In the Heat of the Night; Oliver!; Midnight Cowboy; Patton; The French Connection; The Godfather; The Sting; The Godfather Part II; One Flew over the Cuckoo's Nest; Rocky; Annie Hall; The Deer Hunter; Kramer vs. Kramer; Ordinary People; Chariots of Fire; Gandhi; Terms of Endearment; Amadeus; Out of Africa; Platoon; The Last Emperor; Rain Man; Driving Miss Daisy; Dances With Wolves; The Silence of the Lambs; Unforgiven; Schindler's List; Forrest Gump; Braveheart; The English Patient; Titanic; Shakespeare in Love; American Beauty; Gladiator; A Beautiful Mind; Chicago; The Lord of the Rings: The Return of the King; Million Dollar Baby; Crash; The Departed; No Country for Old Men; Slumdog Millionaire; The Hurt Locker; The King's Speech; The Artist; Argo; 12 Years a Slave; Birdman or (The Unexpected Virtue of Ignorance); Spotlight; Moonlight; The Shape of Water; Green Book; Parasite; Nomadland; CODA; Everything Everywhere All at Once; Oppenheimer; Anora.
+````
 ---
 
 * Sidney Poitier foi o primeiro ator negro a ser indicado ao Oscar. Em que ano ele foi indicado? Por qual filme?
 
+```js
+db.Oscar.find({
+  nome_do_indicado: { $regex: /sidney poitier/i },
+  categoria: { $regex: /actor/i }
+})
+.sort({ ano_cerimonia: 1 })
+.limit(1)
+
+
+1959. The Defiant Ones.
+```
 ---
 
 * Quais os filmes que ganharam o Oscar de Melhor Filme e Melhor Diretor na mesma cerimonia?
